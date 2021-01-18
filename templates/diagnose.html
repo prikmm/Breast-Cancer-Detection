@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnose</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='diagnose.css') }}">
+    <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lemonada&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Website Title -->
+    <div class="container">
+        <h2 class='container-heading'><span class="heading_font">Breast Cancer Detection</span></h2>
+    </div>
+
+    <div id="navbar">
+        <ul id="button_list">
+            <li class="buttons"><a href="{{ url_for('home') }}" class="links">Home</a></li>
+            <li class="buttons"><a href="{{ url_for('diagnose') }}" class="links">Diagnose</a></li>
+        </ul>
+    </div>
+    <!--
+    texture_mean, area_mean, smoothness_mean, concave_points_mean,
+    symmetry_mean, fractal_dimension_mean, texture_se, area_se, smootheness_se, 
+    compactness_se, concavity_se, concave_points_se, symmetry_se, fractal_dimension_se, 
+    concavity_worst, symmetry_worst, fractal_dimension_worst
+    -->
+
+    <div class="ml-container">
+        <form action="{{ url_for('predict') }}" method="POST" class="diagose_values">
+            
+
+            <div id="form_group1">
+                <div class="feature">
+                <h4>Texture mean: </h4>
+                <input class="form-input" type="text" name="Texture mean" placeholder="eg. 10.38"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Mean of Standard Deviation of gray-scale values of all cells</span></div>
+                </div>
+
+                <div class="feature">
+                <h4>Area mean: </h4>
+                <input class="form-input" type="text" name="Area mean" placeholder="eg. 1001"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Mean Area of the cells</span></div>                
+                </div>
+
+                <div class="feature">
+                <h4>Smoothness mean: </h4>
+                <input class="form-input" type="text" name="Smoothness mean" placeholder="eg. 0.1184"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Mean Smoothness of all the cells</span></div>               
+                </div>
+
+                <div class="feature">
+                <h4>Concave Points mean: </h4>
+                <input class="form-input" type="text" name="Concave Points mean" placeholder="eg. 0.1471"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Mean of Number of Concave points across all cells</span></div>                
+                </div>
+
+                <div class="feature">
+                <h4>Symmetry mean: </h4>
+                <input class="form-input" type="text" name="Symmetry mean" placeholder="eg. 0.2419"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Mean of Symmetry measure of all cells</span></div>               
+                </div>
+
+                <div class="feature">
+                <h4>Fractal Dimension mean: </h4>
+                <input class="form-input" type="text" name="Fractal Dimension mean" placeholder="eg. 0.07871"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Mean of coastline approximation of all cells</span></div>                
+                </div>
+
+                <div class="feature">
+                <h4>Texture standard error: </h4>
+                <input class="form-input" type="text" name="Texture standard error" placeholder="eg. 0.9053"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Standard Error of Standard Deviation of gray-scale values of all cells</span></div>                
+                </div>
+            
+                <div class="feature">
+                <h4>Area standard error: </h4>
+                <input class="form-input" type="text" name="Area standard error" placeholder="eg. 153.4"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Standard Error of Area of cells</span></div>                
+                </div>
+
+                <div class="feature">
+                <h4>Smoothness standard error: </h4>
+                <input class="form-input" type="text" name="Smoothness standard error" placeholder="eg. 0.006399"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Standard Error of Smoothness of all cells</span></div>                
+                </div>
+            </div>
+
+
+            <div id="form_group2">
+                <div class="feature">
+                <h4>Compactness standard error: </h4>
+                <input class="form-input" type="text" name="Compactness standard error" placeholder="eg. 0.04904"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Standard Error of compactness of alll cells</span></div>          
+                </div>
+
+                <div class="feature">
+                <h4>Concavity standard error: </h4>
+                <input class="form-input" type="text" name="Concavity standard error" placeholder="eg. 0.05373"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Standard errror of concavity for all cells</span></div>               
+                </div>
+
+                <div class="feature">
+                <h4>Concave Points standard error: </h4>
+                <input class="form-input" type="text" name="Concave Points standard error" placeholder="eg. 0.01587"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Standard errror of count of Concave points for all cells</span></div>                
+                </div>
+
+                <div class="feature">
+                <h4>Symmetry standard error: </h4>
+                <input class="form-input" type="text" name="Symmetry standard error" placeholder="eg. 0.03003"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Standard error of symmetry measure of all cells</span></div>                
+                </div>
+
+                <div class="feature">
+                <h4>Fractal Dimension standard error: </h4>
+                <input class="form-input" type="text" name="Fractal Dimension standard error" placeholder="eg. 0.006193"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Standard Error of coastline approximation of all cells</span></div>
+                </div>
+
+                <div class="feature">
+                <h4>Concavity worst: </h4>
+                <input class="form-input" type="text" name="Concavity worst" placeholder="eg. 0.7119"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Average of Top 3 maximum values of Concavity</span></div>
+                </div>
+
+                <div class="feature">
+                <h4>Symmetry worst: </h4>
+                <input class="form-input" type="text" name="Symmetry worst" placeholder="eg. 0.4601"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Average of Top 3 maximum values of Symmetry measure</span></div>
+                </div>
+
+                <div class="feature">
+                <h4>Fractal Dimension worst: </h4>
+                <input class="form-input" type="text" name="Fractal Dimension worst" placeholder="eg. 0.1189"><br>
+                <div class="tooltip">&#9432;<span class="tooltiptext">Average of Top 3 maximum values of Fractal dimensions</span></div>
+                </div>
+            </div>
+
+            <input type="submit" class="my-cta-button" value="Predict">
+        </form>
+    </div>
+    
+
+   <!-- Footer -->
+   <div class='footer'>
+        <div class="contact">
+            <a target="_blank" href="https://github.com/prikmm" class="logos"><i class="fab fa-github fa-lg contact-icon"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/priyam-mehta-850925115/" class="logos"><i class="fab fa-linkedin fa-lg contact-icon"></i></a>
+            <a target="_blank" href="https://www.kaggle.com/priyammehta" class="logos"><i class="fab fa-kaggle fa-lg contact-icon"></i></a>
+        </div>
+    </div>
+    
+</body>
+</html>

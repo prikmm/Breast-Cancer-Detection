@@ -3,76 +3,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Breast Cancer Detection</title>
+    <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
     <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lemonada&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Website Title -->
-    <div class="container">
-        <h2 class='container-heading'><span class="heading_font">Breast Cancer Detection</span></h2>
-        <div class='description'>
-            <p>Model Accuracy 82%</p>
+    <div id="content">
+        <!-- Website Title -->
+        <div class="container">
+            <h2 class='container-heading'><span class="heading_font">Breast Cancer Detection</span></h2>
         </div>
-    </div>
 
-    <!--
-    texture_mean, area_mean, smoothness_mean, concave_points_mean,
-    symmetry_mean, fractal_dimension_mean, texture_se, area_se, smootheness_se, 
-    compactness_se, concavity_se, concave_points_se, symmetry_se, fractal_dimension_se, 
-    concavity_worst, symmetry_worst, fractal_dimension_worst
-    -->
+        <div id="navbar">
+            <ul id="button_list">
+                <li class="buttons"><a href="{{ url_for('home') }}" class="links">Home</a></li>
+                <li class="buttons"><a href="{{ url_for('diagnose') }}" class="links">Diagnose</a></li>
+            </ul>
+        </div>
+        <!--
+        texture_mean, area_mean, smoothness_mean, concave_points_mean,
+        symmetry_mean, fractal_dimension_mean, texture_se, area_se, smootheness_se, 
+        compactness_se, concavity_se, concave_points_se, symmetry_se, fractal_dimension_se, 
+        concavity_worst, symmetry_worst, fractal_dimension_worst
+        -->
 
-    <!-- Text Area -->
-    <div class="ml-container">
-        <form action="{{ url_for('predict') }}" method="POST">
-            <h4>Texture mean</h4>
-            <input class="form-input" type="text" name="Texture mean" placeholder="eg. 7.1"><br>
-            <h4>Area mean</h4>
-            <input class="form-input" type="text" name="Area mean" placeholder="eg. 7.1"><br>
-            <h4>Smoothness mean</h4>
-            <input class="form-input" type="text" name="Smoothness mean" placeholder="eg. 0.27"><br>
-            <h4>Concave Points mean</h4>
-            <input class="form-input" type="text" name="Concave Points mean" placeholder="eg. 0.36"><br>
-            <h4>Symmetry mean</h4>
-            <input class="form-input" type="text" name="Symmetry mean" placeholder="eg. 20.7"><br>
-            <h4>Fractal Dimension mean</h4>
-            <input class="form-input" type="text" name="Fractal Dimension mean" placeholder="eg. 0.045"><br>
-            <h4>Texture standard error</h4>
-            <input class="form-input" type="text" name="Texture standard error" placeholder="eg. 45.0"><br>
-            <h4>Area standard error</h4>
-            <input class="form-input" type="text" name="Area standard error" placeholder="eg. 170.0"><br>
-            <h4>Smoothness standard error</h4>
-            <input class="form-input" type="text" name="Smoothness standard error" placeholder="eg. 1.0010"><br>
-            <h4>Compactness standard error</h4>
-            <input class="form-input" type="text" name="Compactness standard error" placeholder="eg. 3.00"><br>
-            <h4>Concavity standard error</h4>
-            <input class="form-input" type="text" name="Concavity standard error" placeholder="eg. 0.45"><br>
-            <h4>Concave Points standard error</h4>
-            <input class="form-input" type="text" name="Concave Points standard error" placeholder="eg. 8.8"><br>
-            <h4>Symmetry standard error</h4>
-            <input class="form-input" type="text" name="Symmetry standard error" placeholder="eg. 7.1"><br>
-            <h4>Fractal Dimension standard error</h4>
-            <input class="form-input" type="text" name="Fractal Dimension standard error" placeholder="eg. 7.1"><br>
-            <h4>Concavity worst</h4>
-            <input class="form-input" type="text" name="Concavity worst" placeholder="eg. 7.1"><br>
-            <h4>Symmetry worst</h4>
-            <input class="form-input" type="text" name="Symmetry worst" placeholder="eg. 7.1"><br>
-            <h4>Fractal Dimension worst</h4>
-            <input class="form-input" type="text" name="Fractal Dimension worst" placeholder="eg. 7.1"><br>
-            <input type="submit" class="my-cta-button" value="Predict">
-        </form>
-    </div>
-    
-
-    <!-- Footer -->
-    <div class='footer'>
-        <div class="contact">
-            <a target="_blank" href="https://github.com/prikmm"><i class="fab fa-github fa-lg contact-icon"></i></a>
-            <a target="_blank" href="https://www.linkedin.com/in/priyam-mehta-850925115/"><i class="fab fa-linkedin fa-lg contact-icon"></i></a>
-            <a target="_blank" href="https://www.kaggle.com/priyammehta"><i class="fab fa-kaggle fa-lg contact-icon"></i></a>
+        <!-- Text Area --->
+        <div id="describe">
+            <h4 id="project_description">
+                Hey, This is my first complete end to end deployment project. I have used the <a href="https://www.kaggle.com/uciml/breast-cancer-wisconsin-data" class="desc_links">Wisconsin Breast Cancer Data</a>.
+                The model being used under the hood is a CatBoostClassifier.
+                I tried 5 different ensemble models like, GradientBoosting, XGBoost, RandomForest, LightGBM & CatBoost.
+                Out of all CatBoost performed the best with an accuracy of about 92%.
+            </h4>
+            <h4> So, I chose to train another CatBoostClassifier, so as to pass
+                it into a Soft Voting Ensemble Classifier with a purpose of increasing the accuracy. But, the second indivitual trained CatBoostClassifier
+                outperformed both the first CatBoostClassifier as well as the SoftVotingClassifier (two CatBoostClassifiers). The accuracy of second CatBoostClassifier
+                was 96% on Validation set, & 97% on Test set, where as the accuracy of SoftVotingClassifier was 95% on Validation Set. Hence, I chose the second CatBoostClassifier. 
+            </h4>
+            <p id="kaggle_notebook">I have attached my kaggle notebook link below: (The best model is different because I used Colab for training and then uploaded the notebook on kaggle)</p>
+            <a href="https://www.kaggle.com/priyammehta/breast-cancer-comprehensive-analysis" class="desc_links">Kaggle Notebook</a>
+            <h4 id="what_bc">Purpose of this project:</h4>
+            <p id="bc_description"> 
+                Breast cancer is a type of cancer that starts in the breast. Cancer starts when cells begin to grow out of control.
+                Breast cancer cells usually form a tumor that can often be seen on an x-ray or felt as a lump. Breast cancer occurs almost entirely in women, but men can get breast cancer, too.
+                It’s important to understand that most breast lumps are benign and not cancer (malignant). Non-cancerous breast tumors are abnormal growths, but they do not spread outside of the breast.<br>
+                They are not life threatening, but some types of benign breast lumps can increase a woman's risk of getting breast cancer. Any breast lump or change needs to be checked by a health care professional<br>
+                to determine if it is benign or malignant (cancer) and if it might affect your future cancer risk.
+            </p>
+        </div>
+        <!-- Footer -->
+        <div class='footer'>
+            <div class="contact">
+                <a target="_blank" href="https://github.com/prikmm" class="logos"><i class="fab fa-github fa-lg contact-icon"></i></a>
+                <a target="_blank" href="https://www.linkedin.com/in/priyam-mehta-850925115/" class="logos"><i class="fab fa-linkedin fa-lg contact-icon"></i></a>
+                <a target="_blank" href="https://www.kaggle.com/priyammehta" class="logos"><i class="fab fa-kaggle fa-lg contact-icon"></i></a>
+            </div>
         </div>
     </div>
     
